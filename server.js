@@ -1,5 +1,6 @@
 // Dependencies
 const express = require("express");
+const router = express.Router();
 const path = require("path");
 const db = require("./db/db.json");
 
@@ -29,6 +30,15 @@ app.post("/api/notes", (req, res) => {
   const newNote = req.body;
   console.log(newNote);
   res.json(newNote);
+});
+
+app.delete("/api/notes/:id", (req, res) => {
+  console.log(req.params.id);
+  const id = req.params.id;
+  console.log(db[id]);
+  db.splice(id, 1);
+  console.log(db);
+  res.json("success");
 });
 
 // Starts the server to begin listening
