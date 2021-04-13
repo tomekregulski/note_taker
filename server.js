@@ -1,6 +1,5 @@
 // Dependencies
 const express = require("express");
-const router = express.Router();
 const path = require("path");
 const db = require("./db/db.json");
 const { v4: uuidv4 } = require("uuid");
@@ -33,16 +32,14 @@ app.post("/api/notes", (req, res) => {
   const newNote = req.body;
   newNote.id = uuidv4();
   console.log(newNote.id);
-  // console.log(newNote);
   fs.readFile("./db/db.json", function (err, data) {
     var list = JSON.parse(data);
     list.push(newNote);
-    console.log(list);
     fs.writeFile("./db/db.json", JSON.stringify(list), function (err) {
       if (err) throw err;
     });
   });
-  res.json(newNote);
+  res.json("Successfully posted new note");
 });
 
 app.delete("/api/notes/:id", (req, res) => {
@@ -51,11 +48,7 @@ app.delete("/api/notes/:id", (req, res) => {
   fs.writeFile("./db/db.json", JSON.stringify(newDb), (err) => {
     if (err) throw err;
   });
-  console.log("note deleted!");
-  // console.log(deletedNote.id);
-  // const id = req.params.id;
-  // console.log(db[id]);
-  // db.splice(id, 1);
+  console.log("The note was deleted successfully");
   res.json("success");
 });
 
