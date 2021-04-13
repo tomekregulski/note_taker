@@ -13,6 +13,8 @@ const PORT = process.env.PORT || 3000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.use(express.static(path.join(__dirname, "public")));
+
 // Routes
 // Basic route that sends the user first to the AJAX Page
 app.get("/", (req, res) =>
@@ -28,7 +30,16 @@ app.get("/api/notes", (req, res) => res.json(db));
 app.post("/api/notes", (req, res) => {
   console.log("Note received!");
   const newNote = req.body;
-  console.log(newNote);
+  // console.log(newNote);
+  fs.readFile("./db/db.json", function (err, data) {
+    var list = JSON.parse(data);
+    list.push(newNote);
+    console.log(list);
+    fs.writeFile("./db/db.json", JSON.stringify(list), function (err) {
+      if (err) throw err;
+      console.log('The "data to append" was appended to file!');
+    });
+  });
   res.json(newNote);
 });
 
