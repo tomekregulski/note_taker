@@ -6,6 +6,9 @@
 - [Installation and Usage](#installation-and-use)
 - [License](#license)
 
+![screenshot-landing-page](assets/images/demo1.png)
+![screenshot-notes-page](assets/images/demo2.png)
+
 # Description
 
 The user is brough to a landing page form which they can access the 'Notes' page. Once loaded, the 'Notes' page displays a column of saved notes, a main body that either displays a selected note or allow sthe user to input a new note, as well as a header with buttons to save or write new notes.
